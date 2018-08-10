@@ -1,10 +1,12 @@
+
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
 import { ExemplosPipesComponent } from './exemplos-pipes/exemplos-pipes.component';
 import { CamelCasePipe } from './camel-case.pipe';
+import { SettingServiceService } from './setting.service';
 
 
 @NgModule({
@@ -16,7 +18,21 @@ import { CamelCasePipe } from './camel-case.pipe';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [ 
+    /*{
+      provide: LOCALE_ID,
+      useValue: 'en-US',
+    
+    }*/
+    SettingServiceService,
+    {
+      provide: LOCALE_ID,
+      deps: [SettingServiceService],
+      useFactory: (settingService) => settingService.getLocale()
+      
+    }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
