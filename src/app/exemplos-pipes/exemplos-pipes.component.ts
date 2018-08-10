@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ValueTransformer } from '@angular/compiler/src/util';
+import { resolve } from 'url';
+import { Observable } from 'rxjs/Rx'
 
 @Component({
   selector: 'app-exemplos-pipes',
@@ -19,6 +21,13 @@ export class ExemplosPipesComponent implements OnInit {
 
   livros: string[] = ['Java','Angular 2'];
   filtro: string='';
+
+  valorAsync = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('valor assincrono'), 5000) 
+  });
+
+  valorAsync2 = Observable.interval(2000)
+  .map(valor => 'Valor Assincrono 2')
 
   constructor() { }
 
