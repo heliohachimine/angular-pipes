@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ValueTransformer } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-exemplos-pipes',
@@ -23,10 +24,23 @@ export class ExemplosPipesComponent implements OnInit {
 
   ngOnInit() {
   }
+
   addCurso(valor){
     this.livros.push(valor);
     console.log(valor);
     console.log(this.livros);
+  }
+  obterCursos(){
+    if(this.livros.length === 0 || this.filtro === undefined || this.filtro.trim() === ''){
+      return this.livros;
+    } 
+    return this.livros.filter((v)=> {
+      if(v.toLowerCase().indexOf(this.filtro.toLowerCase())){
+        return false;
+      }
+      return true;
+    });
+    
   }
 
 }
